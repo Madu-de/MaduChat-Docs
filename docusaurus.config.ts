@@ -155,9 +155,13 @@ const config: Config = {
               to: 'docs/contributors'
             },
             {
-              label: 'GitHub',
+              label: 'My Github profile',
               href: 'https://github.com/Madu-de',
             },
+            {
+              label: 'License',
+              href: 'https://www.gnu.org/licenses/agpl-3.0.de.html'
+            }
           ],
         },
       ],
