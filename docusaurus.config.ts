@@ -38,7 +38,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           docItemComponent: "@theme/ApiItem",
           editUrl:
-            'https://github.com/Madu-de/MaduChat-Docs/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/Madu-de/MaduChat-Docs/edit/main/',
         },
         blog: false,
         theme: {
@@ -150,6 +150,10 @@ const config: Config = {
         {
           title: 'More',
           items: [
+            {
+              label: 'Contributors❤️',
+              to: 'docs/contributors'
+            },
             {
               label: 'GitHub',
               href: 'https://github.com/Madu-de',
