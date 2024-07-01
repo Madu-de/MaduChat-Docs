@@ -126,7 +126,7 @@ const config: Config = {
             },
             {
               label: 'API',
-              to: '/docs/api/introduction',
+              to: '/api/introduction',
             },
           ],
         },
