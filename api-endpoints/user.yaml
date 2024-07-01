@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: MaduChat API
+  description: User endpoints
+  version: 1.3.0
+servers:
+  - url: http://localhost:3000
+    description: Nest.js server
+paths:
+  /users/{id | 'me'}:
+    get:
+      summary: Get User
+      description: Returns the user with the given id or the authenticated user
+      responses:
+        '200':    # status code
+          description: The requested
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  id: 
+                    type: string
+                    example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+                  email:
+                    type: string
+                    example: madu@example.com
+                  name:
+                    type: string
+                    example: Madu
+                  username: 
+                    type: string
+                    example: madu

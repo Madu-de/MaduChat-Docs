@@ -1,0 +1,156 @@
+---
+id: get-user
+title: "Get User"
+description: "Returns the user with the given id or the authenticated user"
+sidebar_label: "Get User"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFkktv3CAUhf8KOptsmLHn0WTEqlVXXSSKonYVZUHM9cDIPALXSSvX/73CE1VtKqVs4MB37gOYYKh02SV2MUDhjnjMoQi2JMZCWbw4tos6umcKwhkR86L1yJYCu04zmYWFRKaSYihUoCZs27ZOfyf4aklkehqpMBlIdDEwBa6gTmmo4VwMzalUekLpLHldV/wjERTi44k6hkTKMVFmd87lzB9M4ezCERL0Xfs01C3d9tvt45ZWut0dVvt+s1npQ79ZXfYf+t3+at/rK4NZgrx2w/uhvDbjx1e57qKvtqA9ve+61masZL2o/9N+oc9DwhPbaKBwpKVzzRYKTQ1VmskZ8VNceLqYIVEoP1MuUPcTxjxAwTIn1TRD7PRgY2G1a9sW8s2z3FDh9amIsx/zg4QLfVyqdPy7g89Ws/h0++Uf/7f6VyiYFF3gAolaxflos96tW8zzL66W0Go=
+sidebar_class_name: "get api-method"
+info_path: api/user/maduchat-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get User"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/{id | 'me'}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns the user with the given id or the authenticated user
+
+<div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          The requested
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"id"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","example":"a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"email"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","example":"madu@example.com"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"name"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","example":"Madu"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"username"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","example":"madu"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"id\": \"a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d\",\n  \"email\": \"madu@example.com\",\n  \"name\": \"Madu\",\n  \"username\": \"madu\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

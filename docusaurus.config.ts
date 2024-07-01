@@ -37,8 +37,6 @@ const config: Config = {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
           docItemComponent: "@theme/ApiItem",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/Madu-de/MaduChat-Docs/tree/main/packages/create-docusaurus/templates/shared/',
         },
@@ -61,12 +59,9 @@ const config: Config = {
         id: "api", // plugin id
         docsPluginId: "classic", // id of plugin-content-docs or preset for rendering docs
         config: {
-          api: { // the <id> referenced when running CLI commands
-            specPath: "api-endpoints/endpoints.yaml", // path to OpenAPI spec, URLs supported
-            outputDir: "docs/api", // output directory for generated files
-            sidebarOptions: { // optional, instructs plugin to generate sidebar.js
-              groupPathsBy: "tag", // group sidebar items by operation "tag"
-            },
+          user: { // the <id> referenced when running CLI commands
+            specPath: "api-endpoints/user.yaml", // path to OpenAPI spec, URLs supported
+            outputDir: "docs/api/user", // output directory for generated files
           },
         }
       }
