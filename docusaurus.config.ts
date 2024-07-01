@@ -118,11 +118,11 @@ const config: Config = {
           items: [
             {
               label: 'Frontend',
-              to: '/docs/category/frontend',
+              to: '/category/frontend',
             },
             {
               label: 'Backend',
-              to: '/docs/category/backend',
+              to: '/category/backend',
             },
             {
               label: 'API',
