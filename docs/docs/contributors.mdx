@@ -1,0 +1,29 @@
+---
+title: Contributors
+sidebar_position: 1.2
+---
+
+<b>Special thanks to all our contributors! Without you, MaduChat wouldn't be the same thing!🚀🎉</b>
+
+<ContributorList>
+  <Contributor name="Madu" image="https://avatars.githubusercontent.com/u/85842735" link="https://github.com/Madu-de" />
+  <Contributor name="Izaan Anwar" image="https://avatars.githubusercontent.com/u/99073963" link="https://github.com/IzaanAnwar" />
+  <Contributor name="Igor Lira" image="https://avatars.githubusercontent.com/u/56862592" link="https://github.com/Igor-Lira" />
+</ContributorList>
+
+
+
+
+export const Contributor = ({name, image, link}) => {
+  return (
+    <>
+      <a href={link} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}><img src={image} width="100px;" alt={name} style={{borderRadius: '100%'}}/><br /><sub style={{marginTop: '-18%'}}>{name}</sub></a>
+    </>
+  );
+}
+
+export const ContributorList = ({children}) => {
+  return (
+    <div style={{display: 'flex', gap: '20px', marginTop: '20px', alignItems: 'center', flexWrap: 'wrap'}}>{children}</div>
+  );
+}
