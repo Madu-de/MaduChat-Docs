@@ -1,0 +1,46 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Repositories": {
+    "message": "Repositories",
+    "description": "The title of the footer links column with title=Repositories in the footer"
+  },
+  "link.title.More": {
+    "message": "More",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Frontend": {
+    "message": "Frontend",
+    "description": "The label of footer link with label=Frontend linking to /docs/category/frontend"
+  },
+  "link.item.label.Backend": {
+    "message": "Backend",
+    "description": "The label of footer link with label=Backend linking to /docs/category/backend"
+  },
+  "link.item.label.API": {
+    "message": "API",
+    "description": "The label of footer link with label=API linking to /docs/api/introduction"
+  },
+  "link.item.label.MaduChat": {
+    "message": "MaduChat",
+    "description": "The label of footer link with label=MaduChat linking to https://github.com/Madu-de/MaduChat"
+  },
+  "link.item.label.MaduChat-CLI": {
+    "message": "MaduChat-CLI",
+    "description": "The label of footer link with label=MaduChat-CLI linking to https://github.com/Madu-de/MaduChat-CLI"
+  },
+  "link.item.label.MaduChat-Docs": {
+    "message": "MaduChat-Docs",
+    "description": "The label of footer link with label=MaduChat-Docs linking to https://github.com/Madu-de/MaduChat-Docs"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/Madu-de"
+  },
+  "copyright": {
+    "message": "Copyright © 2024 MaduChat",
+    "description": "The footer copyright"
+  }
+}

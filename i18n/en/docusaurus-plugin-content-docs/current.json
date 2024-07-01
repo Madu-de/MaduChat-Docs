@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docSidebar.category.Frontend": {
+    "message": "Frontend",
+    "description": "The label for category Frontend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.Frontend.link.generated-index.description": {
+    "message": "MaduChat Frontend",
+    "description": "The generated-index page description for category Frontend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.Backend": {
+    "message": "Backend",
+    "description": "The label for category Backend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.Backend.link.generated-index.description": {
+    "message": "MaduChat Backend",
+    "description": "The generated-index page description for category Backend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.Classes": {
+    "message": "Classes",
+    "description": "The label for category Classes in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.Classes.link.generated-index.description": {
+    "message": "All classes included in frontend and backend",
+    "description": "The generated-index page description for category Classes in sidebar docSidebar"
+  },
+  "sidebar.apiSidebar.category.User": {
+    "message": "User",
+    "description": "The label for category User in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.User.link.generated-index.description": {
+    "message": "User API endpoints",
+    "description": "The generated-index page description for category User in sidebar apiSidebar"
+  }
+}
