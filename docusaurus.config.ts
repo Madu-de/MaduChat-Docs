@@ -90,6 +90,19 @@ const config: Config = {
           position: 'left',
           label: 'API',
         },
+        /* Remove comment, if versions exist
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownItemsAfter: [
+            {
+              to: '/versions', 
+              label: 'All versions'
+            }
+          ],
+          dropdownActiveClassDisabled: true,
+        },
+        */
         {
           href: 'https://github.com/Madu-de/MaduChat',
           label: 'GitHub',
