@@ -510,7 +510,7 @@ components:
         totalSent2Star:
           type: number
           example: 22
-        totalRSent3Star:
+        totalSent3Star:
           type: number
           example: 76
         totalSent4Star:
