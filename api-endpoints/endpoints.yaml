@@ -1,0 +1,327 @@
+openapi: 3.0.0
+info:
+  title: MaduChat API
+  version: 1.3.0
+  contact: 
+    name: Madu-de
+    url: https://github.com/Madu-de
+    email: kontakt.madu@gmail.com
+  license: 
+    name: GNU Affero General Public License v3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.de.html
+servers:
+  - url: http://localhost:3000
+    description: Nest.js local server
+tags: 
+  - name: user
+    description: User Endpoints
+    x-displayName: User
+paths:
+  /users:
+    get:
+      operationId: get-users-like
+      security: 
+        - JWT: []
+      tags: 
+        - user
+      summary: Get Users like
+      description: Returns all users which includes the "like" parameter 
+      parameters:
+        - name: like
+          in: query
+          required: true
+          description: Chars contained in username or name of users
+          schema:
+            type: string
+        - name: friends
+          in: query
+          required: false
+          description: Get friend data too
+          schema:
+            type: boolean
+        - name: chats
+          in: query
+          required: false
+          description: Get chats too
+          schema:
+            type: boolean
+        - name: settings
+          in: query
+          required: false
+          description: Get settings too
+          schema:
+            type: boolean
+        - name: reviews
+          in: query
+          required: false
+          description: Get writtenReviews, recievedReviews and reviewStats too
+          schema:
+            type: boolean
+      responses:
+        '200':    # status code
+          description: OK
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        '400':
+          description: Parameter 'like' is required
+        '401':
+          description: Unauthorized
+  /users/{id}:
+    get:
+      operationId: get-user
+      security: 
+        - JWT: []
+      tags: 
+        - user
+      summary: Get User
+      description: Returns the user with the given id or the authenticated user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User id
+          schema:
+            type: string
+        - name: friends
+          in: query
+          required: false
+          description: Get friend data too
+          schema:
+            type: boolean
+        - name: chats
+          in: query
+          required: false
+          description: Get chats too
+          schema:
+            type: boolean
+        - name: settings
+          in: query
+          required: false
+          description: Get settings too
+          schema:
+            type: boolean
+        - name: reviews
+          in: query
+          required: false
+          description: Get writtenReviews, recievedReviews and reviewStats too
+          schema:
+            type: boolean
+      responses:
+        '200':    # status code
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/User"
+        '400':
+          description: User not found
+        '401':
+          description: Unauthorized
+
+
+
+components: 
+  securitySchemes: 
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties: 
+        id: 
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        email:
+          type: string
+          example: madu@example.com
+        name:
+          type: string
+          example: Madu
+        username: 
+          type: string
+          example: madu
+        isAdmin:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: false
+        isOnline:
+          type: boolean
+          example: true
+        friendRequestsSent:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserLite"
+        friendRequestsReceived:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserLite"
+        friends:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserLite"
+        settings:
+          $ref: "#/components/schemas/Settings"
+        chats:
+          type: array
+          items:
+            $ref: "#/components/schemas/Chat"
+        writtenReviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+        receivedReviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+        reviewStats:
+          $ref: "#/components/schemas/ReviewStats"
+    UserLite:
+      type: object
+      description: This schema is actually not existing. Its the [User](user) schema without relations to make the examples easier to read
+      properties: 
+        id: 
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        email:
+          type: string
+          example: madu@example.com
+        name:
+          type: string
+          example: Madu
+        username: 
+          type: string
+          example: madu
+        isAdmin:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: false
+        isOnline:
+          type: boolean
+          example: true
+    Settings:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        language:
+          type: string
+          enum: [English, Deutsch, Français, Español]
+          example: Français
+        showAvatar:
+          type: boolean
+          example: false
+        onlinePrivacy:
+          type: string
+          enum: [everyone, friends, noone]
+          example: everyone
+    Chat:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        name:
+          type: string
+          example: Example chat
+        isPublic:
+          type: boolean
+          example: true
+        isAdminChat:
+          type: boolean
+          example: false
+        admins:
+          type: array
+          items: 
+            $ref: "#/components/schemas/UserLite"
+        members:
+          type: array
+          items: 
+            $ref: "#/components/schemas/UserLite"
+    Review:
+      type: object
+      properties: 
+        id:
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        author:
+          $ref: "#/components/schemas/UserLite"
+        target:
+          $ref: "#/components/schemas/UserLite"
+        text:
+          type: string
+          example: This is a review
+        stars:
+          type: number
+          minimum: 1
+          maximum: 5
+          example: 2
+        createdAt:
+          format: date
+        updatedAt:
+          format: date
+    ReviewStats:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        avarageReceivedStars:
+          type: number
+          minimum: 0
+          maximum: 5
+          example: 3.25
+        avarageSentStars:
+          type: number
+          minimum: 0
+          maximum: 5
+          example: 2.5
+        totalReceivedStars:
+          type: number
+          example: 23
+        totalSentStars:
+          type: number
+          example: 6
+        totalSentReviews:
+          type: number
+          example: 65
+        totalReceived1Star:
+          type: number
+          example: 4
+        totalReceived2Star:
+          type: number
+          example: 45
+        totalReceived3Star:
+          type: number
+          example: 3
+        totalReceived4Star:
+          type: number
+          example: 7
+        totalReceived5Star:
+          type: number
+          example: 2
+        totalSent1Star:
+          type: number
+          example: 23
+        totalSent2Star:
+          type: number
+          example: 22
+        totalRSent3Star:
+          type: number
+          example: 76
+        totalSent4Star:
+          type: number
+          example: 23
+        totalSent5Star:
+          type: number
+          example: 0

@@ -59,11 +59,15 @@ const config: Config = {
         id: "api", // plugin id
         docsPluginId: "classic", // id of plugin-content-docs or preset for rendering docs
         config: {
-          user: { // the <id> referenced when running CLI commands
-            specPath: "api-endpoints/user.yaml", // path to OpenAPI spec, URLs supported
-            outputDir: "docs/api/user", // output directory for generated files
+          api: { // the <id> referenced when running CLI commands
+            specPath: "api-endpoints/endpoints.yaml", // path to OpenAPI spec, URLs supported
+            outputDir: "docs/api/", // output directory for generated files
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+            },
+            showSchemas: true,
           },
-        }
+        },
       }
     ]
   ],
