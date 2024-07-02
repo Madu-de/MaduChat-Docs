@@ -61,7 +61,7 @@ const config: Config = {
         config: {
           api: { // the <id> referenced when running CLI commands
             specPath: "api-endpoints/endpoints.yaml", // path to OpenAPI spec, URLs supported
-            outputDir: "docs/api/", // output directory for generated files
+            outputDir: "docs/api", // output directory for generated files
             sidebarOptions: {
               groupPathsBy: 'tag',
             },

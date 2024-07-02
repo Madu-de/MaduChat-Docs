@@ -13,10 +13,173 @@ servers:
   - url: http://localhost:3000
     description: Nest.js local server
 tags: 
+  - name: root
+    description: Root Endpoints
+    x-displayName: Root
+  - name: auth
+    description: Auth Endpoints
+    x-displayName: Auth
   - name: user
     description: User Endpoints
     x-displayName: User
 paths:
+  /:
+    get:
+      operationId: test-api
+      security: []
+      tags: 
+        -  root
+      summary: Get Hello
+      description: Request this endpoint to check if the api is available. Returns "MaduChat programmed by Madu"
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain;charset=UTF-8:
+              schema: 
+                type: string
+                example: MaduChat programmed by Madu
+  /auth/login:
+    post: 
+      operationId: login
+      security: []
+      tags: 
+        -  auth
+      summary: Login
+      description: Returns an access_token when the data is correct
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema: 
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: madu
+                password:
+                  type: string
+                  example: myPassword!1
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: myAccessToken
+        '401':
+          description: Password or Username wrong
+  /auth/register:
+    post:
+      operationId: register
+      security: []
+      tags: 
+        -  auth
+      summary: Register
+      description: Returns an access_token when everything is fine
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Madu
+                username:
+                  type: string
+                  example: madu
+                email:
+                  type: string
+                  example: madu@example.com
+                password:
+                  type: string
+                  example: myPassword!1
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: myAccessToken
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                      example: ExampleError
+                  error:
+                    type: string
+                    example: Bad Request
+                  statusCode:
+                    type: number
+                    example: 400
+  /users/{id}:
+    get:
+      operationId: get-user
+      security: 
+        - JWT: []
+      tags: 
+        - user
+      summary: Get User
+      description: Returns the user with the given id or the authenticated user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User id
+          schema:
+            type: string
+        - name: friends
+          in: query
+          required: false
+          description: Get friend data too
+          schema:
+            type: boolean
+        - name: chats
+          in: query
+          required: false
+          description: Get chats too
+          schema:
+            type: boolean
+        - name: settings
+          in: query
+          required: false
+          description: Get settings too
+          schema:
+            type: boolean
+        - name: reviews
+          in: query
+          required: false
+          description: Get writtenReviews, recievedReviews and reviewStats too
+          schema:
+            type: boolean
+      responses:
+        '200':    # status code
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/User"
+        '400':
+          description: User not found
+        '401':
+          description: Unauthorized
   /users:
     get:
       operationId: get-users-like
@@ -68,57 +231,6 @@ paths:
                   $ref: "#/components/schemas/User"
         '400':
           description: Parameter 'like' is required
-        '401':
-          description: Unauthorized
-  /users/{id}:
-    get:
-      operationId: get-user
-      security: 
-        - JWT: []
-      tags: 
-        - user
-      summary: Get User
-      description: Returns the user with the given id or the authenticated user
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: User id
-          schema:
-            type: string
-        - name: friends
-          in: query
-          required: false
-          description: Get friend data too
-          schema:
-            type: boolean
-        - name: chats
-          in: query
-          required: false
-          description: Get chats too
-          schema:
-            type: boolean
-        - name: settings
-          in: query
-          required: false
-          description: Get settings too
-          schema:
-            type: boolean
-        - name: reviews
-          in: query
-          required: false
-          description: Get writtenReviews, recievedReviews and reviewStats too
-          schema:
-            type: boolean
-      responses:
-        '200':    # status code
-          description: OK
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/User"
-        '400':
-          description: User not found
         '401':
           description: Unauthorized
 
