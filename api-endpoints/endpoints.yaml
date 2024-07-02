@@ -25,6 +25,12 @@ tags:
   - name: userprofilepicture
     description: User profile picture Endpoints
     x-displayName: User profile picture
+  - name: usersettings
+    description: User settings Endpoints
+    x-displayName: User settings
+  - name: userreviews
+    description: User reviews Endpoints
+    x-displayName: User reviews
 paths:
   /:
     get:
@@ -311,7 +317,134 @@ paths:
           description: User not found
         '401':
           description: Unauthorized
-
+  /users/me/settings:
+    post:
+      operationId: postsettings
+      security: 
+        -  JWT: []
+      tags: 
+        -  usersettings
+      summary: Post settings
+      description: Saves new settings of the requested user
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Settings"
+      responses: 
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Settings"
+        '400':
+          description: |
+            Datatype of '{key}' value is not the same as needed. Is: '{datatypeOfKey}' Has to be: '{datatypeOfSetting}'
+        '401':
+          description: Unauthorized
+  /users/me/settings/{key}:
+    post:
+      operationId: postsetting
+      security: 
+        -  JWT: []
+      tags: 
+        -  usersettings
+      summary: Post setting
+      description: Changes one setting of the requested user settings
+      parameters: 
+        - name: key
+          in: path
+          required: true
+          schema: 
+            type: string
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema: 
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: Deutsch
+      responses: 
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Settings"
+        '400':
+          description: |
+            Datatype of '{key}' value is not the same as needed. Is: '{datatypeOfKey}' Has to be: '{datatypeOfSetting}'
+        '401':
+          description: Unauthorized
+  /users/{id}/review:
+    parameters: 
+      - name: id
+        in: path
+        required: true
+        schema: 
+          type: string
+    post:
+      operationId: writereview
+      security: 
+        -  JWT: []
+      tags: 
+        -  userreviews
+      summary: Post review
+      description: Send a review to the user, which has the given id
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                stars:
+                  type: number
+                  minimum: 1
+                  maximum: 5
+                  example: 3
+                review:
+                  type: string
+                  example: I don't like this user very much
+      responses: 
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Review"
+        '400':
+          description: |
+            - User is not allowed to review himself
+            - User is not allowed to review this user twice
+            - Invalid review. Stars must be between 1 and 5
+        '401':
+          description: Unauthorized
+    delete:
+      operationId: deletereview
+      security: 
+        -  JWT: []
+      tags: 
+        -  userreviews
+      summary: Delete review
+      description: Delete the received review of the user, which has the given id (written by the requester)
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Review"
+        '400':
+          description: There is no review written by the requester
+        '401':
+          description: Unauthorized
+      
 
 
 
