@@ -142,7 +142,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: User id
+          description: User id or 'me'
           schema:
             type: string
         - name: friends
