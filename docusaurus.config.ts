@@ -130,7 +130,7 @@ const config: Config = {
             },
             {
               label: 'API',
-              to: '/api/introduction',
+              to: '/api/maduchat-api',
             },
           ],
         },
