@@ -22,6 +22,9 @@ tags:
   - name: user
     description: User Endpoints
     x-displayName: User
+  - name: userprofilepicture
+    description: User profile picture Endpoints
+    x-displayName: User profile picture
 paths:
   /:
     get:
@@ -233,6 +236,85 @@ paths:
           description: Parameter 'like' is required
         '401':
           description: Unauthorized
+  /users/{id}/profilepicture:
+    get: 
+      operationId: getProfilePicture
+      security: 
+        -  JWT: []
+      tags: 
+        - userprofilepicture
+      summary: Get profile picture
+      description: Returns the profilepicture of the user
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          description: The id of the user
+          schema: 
+            type: string
+      responses: 
+        '200':
+          description: OK
+          content:
+            blob:
+              schema: 
+                type: string
+                format: binary
+        '400':
+          description: |
+            - User not found
+            - User has no profile picture
+        '401':
+          description: Unauthorized
+  /users/me/profilepicture:
+    put: 
+      operationId: putProfilePicture
+      security: 
+        -  JWT: []
+      tags: 
+        - userprofilepicture
+      summary: Put profile picture
+      description: Changes the profilepicture of the requested user
+      requestBody:
+        content:
+          multipart/form-data:
+            schema: 
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses: 
+        '200':
+          description: OK
+          content:
+            blob:
+              schema: 
+                type: string
+                format: binary
+        '400':
+          description: User not found
+        '401':
+          description: Unauthorized
+    delete:
+      operationId: deleteProfilePicture
+      security: 
+        -  JWT: []
+      tags: 
+        - userprofilepicture
+      summary: Delete profile picture
+      description: Deletes the profilepicture of the requested user
+      responses: 
+        '200':
+          description: OK
+        '400':
+          description: User not found
+        '401':
+          description: Unauthorized
+
+
+
+
 
 
 
