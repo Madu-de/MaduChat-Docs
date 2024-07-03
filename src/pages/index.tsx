@@ -36,6 +36,7 @@ export default function Home(): JSX.Element {
       description="MaduChat - Documentation">
       <HomepageHeader />
       <main>
+        <HomepageFeatures />
       </main>
     </Layout>
   );
