@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hey!`}
+      title={`Documentation`}
       description="MaduChat - Documentation">
       <HomepageHeader />
       <main>
