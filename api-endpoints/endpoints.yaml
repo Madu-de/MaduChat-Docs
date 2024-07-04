@@ -31,6 +31,12 @@ tags:
   - name: userreviews
     description: User reviews Endpoints
     x-displayName: User reviews
+  - name: friends
+    description: Friends Endpoints
+    x-displayName: Friends
+  - name: chat
+    description: Chat Endpoints
+    x-displayName: Chat
 paths:
   /:
     get:
@@ -444,8 +450,198 @@ paths:
           description: There is no review written by the requester
         '401':
           description: Unauthorized
-      
-
+  /friends:
+    post: 
+      operationId: postFriend
+      security: 
+        -  JWT: []
+      tags: 
+        - friends
+      summary: Send friend request
+      description: Sends an friend request to the given user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                friendId:
+                  type: string
+                  example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/User"
+        '400':
+          description: |
+            - You cannot send a friend request to a friend
+            - friendId is required
+        '401':
+          description: Unauthorized
+    delete:
+      operationId: deleteFriend
+      security: 
+        -  JWT: []
+      tags: 
+        - friends
+      summary: Delete friend
+      description: Removes friend/friend request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                friendId:
+                  type: string
+                  example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/User"
+        '400':
+          description: friendId is required
+        '401':
+          description: Unauthorized
+  /chat/{id}:
+    parameters: 
+      - name: id
+        in: path
+        required: true
+        description: The id of the chat
+        schema: 
+          type: string
+    get:
+      operationId: getChat
+      security: 
+        -  JWT: []
+      tags: 
+        - chat
+      summary: Get chat
+      description: Returns the requested chat
+      parameters: 
+        - name: members
+          in: query
+          required: false
+          description: Return members too
+          schema: 
+            type: boolean
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Chat"
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not Allowed
+    put:
+      operationId: putChat
+      security: 
+        -  JWT: []
+      tags: 
+        - chat
+      summary: Edit chat
+      description: Edit chat attributes as admin
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                chat:
+                  $ref: "#/components/schemas/Chat"
+      responses: 
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Chat"
+        '400':
+          description: |
+            - Cannot change chat id
+            - You are not an admin
+            - You cannot kick admins
+            - You can only add friends to your chat
+            - name must be shorter than or equal to 20 characters
+            - name must be longer than or equal to 1 characters
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not Allowed
+  /chat/{id}/messages:
+    get: 
+      operationId: getChatMessages
+      security: 
+        -  JWT: []
+      tags: 
+        - chat
+      summary: Get chat messages
+      description: Returns the messages of the requested chat
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          description: The id of the chat
+          schema: 
+            type: string
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Message"
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not Allowed
+  /chat:
+    post:
+      operationId: postChat
+      security: 
+        -  JWT: []
+      tags: 
+        - chat
+      summary: Post chat
+      description: Creates a chat with sender as owner
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                memberids:
+                  type: array
+                  items:
+                    type: string
+                    example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Chat"
+        '400':
+          description: |
+            - Some members were not found
+            - {id} is not a friend of the owner
+        '401':
+          description: Unauthorized
 
 
 
@@ -575,6 +771,21 @@ components:
           type: array
           items: 
             $ref: "#/components/schemas/UserLite"
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+        message:
+          type: string
+          example: This is a message
+        chat:
+          $ref: "#/components/schemas/Chat"
+        author:
+          $ref: "#/components/schemas/UserLite"
+        createdAt:
+          format: date
     Review:
       type: object
       properties: 
