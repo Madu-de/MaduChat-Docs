@@ -581,6 +581,25 @@ paths:
           description: Unauthorized
         '405':
           description: Not Allowed
+    delete:
+      operationId: deleteChat
+      security: 
+        -  JWT: []
+      tags: 
+        - chat
+      summary: Delete chat
+      description: |
+        :::warning
+
+        Feature is not finished. Responses in development. Works, if request is fine
+        
+        :::
+        Delete chat as admin
+      responses: 
+        '201':
+          description: OK
+        '401':
+          description: Unauthorized
   /chat/{id}/messages:
     get: 
       operationId: getChatMessages
