@@ -177,7 +177,13 @@ const config: Config = {
     },
     colorMode: {
       defaultMode: 'dark',
-    }
+    },
+    metadata: [
+      {
+        name: 'keywords',
+        content: 'maduchat, github, docs, documentation, api, git, open, source, hobby, project, social, media, application'
+      }
+    ],
   } satisfies Preset.ThemeConfig,
 };
 
