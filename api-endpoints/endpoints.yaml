@@ -43,6 +43,10 @@ tags:
   - name: reviews
     description: Review Endpoints
     x-displayName: Reviews
+    
+  - name: webhook
+    description: Webhook Events
+    x-displayName: Webhook
 paths:
   /:
     get:
@@ -814,6 +818,78 @@ paths:
 
 
 
+
+
+
+
+x-webhooks:
+  joinChat:
+    post:
+      operationId: joinChat
+      security: []
+      tags:
+        - webhook
+      summary: joinChat
+      description: Join a chat to get all new messages from the webhook
+      parameters: 
+        - name: authorization
+          in: header
+          description: Bearer <Token>
+          required: true
+          schema: 
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                chatid:
+                  type: string
+                  example: a0f22b2e-a038-4f11-a8f1-6f5f3474fa7d
+      responses:
+        '200':
+          description: |
+            If anything is fine, 'error' will not be triggered
+        '40x':
+          description: |
+            Triggers 'error' WS-Event on client:
+            - Unauthorized
+            - Not Allowed
+  sendMessage:
+    post: 
+      operationId: sendMessageEvent
+      security: []
+      tags: 
+        -  webhook
+      summary: sendMessage
+      description: Send a message in joined chat
+      parameters: 
+        - name: authorization
+          in: header
+          description: Bearer <Token>
+          required: true
+          schema: 
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Example message
+      responses:
+        '200':
+          description: |
+            If anything is fine, 'error' will not be triggered and 'message' will be called. Inside it will be the sent message
+        '40x':
+          description: |
+            Triggers 'error' WS-Event on client:
+            - Unauthorized
+            - Not Allowed
+      
 
 components: 
   securitySchemes: 
